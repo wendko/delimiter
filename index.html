@@ -16,13 +16,12 @@
     <title>Join</title>
     <style>
         body {
-            /* background: #3f2d3fed; */
-            /* background: linear-gradient(to bottom, #f66d9b 40%, #3490dc 60%); */
+            background: linear-gradient(to right, #afd2fb81 0%, #ffe9ff 100%);
         }
 
         .text-pacifico {
             font-family: 'Pacifico', cursive;
-            background: linear-gradient(to right, #f66d9b 40%, #3490dc 60%);
+            background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
             background-clip: text;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -36,7 +35,7 @@
 </head>
 
 <body>
-    <div>
+    <section id="splitAndJoin" class="mb-3">
         <h1 class="m-auto text-center p-10 text-pacifico">Split & Join Strings</h1>
         <div class="m-auto w-5/6">
 
@@ -49,13 +48,13 @@
                     Old separator
                 </div>
                 <input id="separatorOld"
-                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:shadow-outline"
+                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
                     placeholder="Default: new line (\n)" onkeypress="updateText()" onblur="updateText()">
                 <div class="block text-blue font-bold my-5 w-1/6 text-center">
                     New separator
                 </div>
                 <input id="separatorNew"
-                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:shadow-outline"
+                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
                     placeholder="Default: ," onkeypress="updateText()" onblur="updateText()">
             </div>
 
@@ -64,53 +63,26 @@
                 placeholder="Your joined text will appear here" readonly></textarea>
 
             <div class="m-auto text-center">
-                <button id="copy" class="bg-pink hover:bg-blue text-white font-bold py-2 px-4 rounded-full"
+                <button id="copy" class="bg-orange hover:bg-blue text-white font-bold py-2 px-4 mx-3 rounded-full w-2/6"
                     onclick="copy()">
-                    <i class="fa fa-copy">
-                    </i>
-                    Copy
+                    📄 Copy
+                </button>
+                <button id="copy" class="bg-pink hover:bg-blue text-white font-bold py-2 px-4 mx-3 rounded-full w-2/6"
+                    onclick="removeDuplicates()">
+                    👯 Remove Duplicates
                 </button>
             </div>
 
+            <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden">
+                Duplication info
+            </div>
+            <div id="duplicateInfo" class="block text-grey-darker w-full py-2 px-2 leading-tight">
+            </div>
+
         </div>
-    </div>
-    <script>
-        function copy() {
-            document.getElementById("joined").select();
-            document.getElementById("joined").select();
-            document.execCommand('copy');
-        }
+    </section>
 
-        function updateText(event) {
-            const joinedText = getJoinedText();
-            document.getElementById("joined").value = joinedText;
-        }
-
-        function getJoinedText() {
-            const inputText = document.getElementById("textInput").value;
-
-            // split by line break (can be customized - split by $ or whatever)
-            let separatorOld = document.getElementById("separatorOld").value || '\n';
-            const splitText = inputText.split(separatorOld);
-
-            // trim text (can be toggled)
-            const trimmed = splitText.map(x => x.trim())
-
-            // join by something
-            let separator = document.getElementById("separatorNew").value || ',';
-            if (['\\n', 'new line'].includes(separator)) {
-                separator = '\n';
-            }
-            const joinedText = trimmed.join(separator);
-            console.log(joinedText);
-
-            return joinedText;
-        }
-
-        // pending: mobile view
-        // pending: toggle trim text
-
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
