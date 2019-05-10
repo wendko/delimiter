@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="wendko">
+    <meta name="description" content="Split & join text">
+    <meta name="keywords" content="split,join,text">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="icon" type="image/png" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/2728.png">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <title>Join</title>
+    <style>
+        body {
+            /* background: #3f2d3fed; */
+            /* background: linear-gradient(to bottom, #f66d9b 40%, #3490dc 60%); */
+        }
+
+        .text-pacifico {
+            font-family: 'Pacifico', cursive;
+            background: linear-gradient(to right, #f66d9b 40%, #3490dc 60%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        #copy:hover {
+            transition: all 0.1s ease-in-out;
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <h1 class="m-auto text-center p-10 text-pacifico">Split & Join Strings</h1>
+        <div class="m-auto w-5/6">
+
+            <textarea id="textInput"
+                class="h-64 rounded overflow-hidden shadow-lg bg-grey-lighter w-full py-2 px-4 text-grey-darker focus:outline-none focus:bg-white"
+                onkeypress="updateText()" onblur="updateText()"></textarea>
+
+            <div class="flex mt-5 text-center">
+                <div class="block text-blue font-bold my-5 w-1/6 text-center">
+                    Old separator
+                </div>
+                <input id="separatorOld"
+                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:shadow-outline"
+                    placeholder="Default: new line (\n)" onkeypress="updateText()" onblur="updateText()">
+                <div class="block text-blue font-bold my-5 w-1/6 text-center">
+                    New separator
+                </div>
+                <input id="separatorNew"
+                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:shadow-outline"
+                    placeholder="Default: ," onkeypress="updateText()" onblur="updateText()">
+            </div>
+
+            <textarea id="joined"
+                class="block text-grey-darker w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-grey-lighter h-24"
+                placeholder="Your joined text will appear here" readonly></textarea>
+
+            <div class="m-auto text-center">
+                <button id="copy" class="bg-pink hover:bg-blue text-white font-bold py-2 px-4 rounded-full"
+                    onclick="copy()">
+                    <i class="fa fa-copy">
+                    </i>
+                    Copy
+                </button>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        function copy() {
+            document.getElementById("joined").select();
+            document.getElementById("joined").select();
+            document.execCommand('copy');
+        }
+
+        function updateText(event) {
+            const joinedText = getJoinedText();
+            document.getElementById("joined").value = joinedText;
+        }
+
+        function getJoinedText() {
+            const inputText = document.getElementById("textInput").value;
+
+            // split by line break (can be customized - split by $ or whatever)
+            let separatorOld = document.getElementById("separatorOld").value || '\n';
+            const splitText = inputText.split(separatorOld);
+
+            // trim text (can be toggled)
+            const trimmed = splitText.map(x => x.trim())
+
+            // join by something
+            let separator = document.getElementById("separatorNew").value || ',';
+            if (['\\n', 'new line'].includes(separator)) {
+                separator = '\n';
+            }
+            const joinedText = trimmed.join(separator);
+            console.log(joinedText);
+
+            return joinedText;
+        }
+
+        // pending: mobile view
+        // pending: toggle trim text
+
+    </script>
+</body>
+
+</html>
