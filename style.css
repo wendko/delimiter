@@ -1,0 +1,41 @@
+.bg-colorful {
+   background:  linear-gradient(to right, #afd2fb81 0%, #ffe9ff 100%);
+}
+
+.title-text {
+    font-family: 'Pacifico', cursive;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-text-colorful {
+    background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
+     background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.title-text-basic {
+    background:  #3490dc;
+     background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.none {
+
+}
+
+
+#mode {
+    top: 0;
+    right: 0;
+    position: absolute;
+    padding: 10px;
+    border-bottom-left-radius: 20px;
+}
+
+.theme {
+    transition: all 0.1s ease-in;
+}

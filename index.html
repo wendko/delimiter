@@ -13,67 +13,75 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
         integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
     <title>Join</title>
-    <style>
-        body {
-            background: linear-gradient(to right, #afd2fb81 0%, #ffe9ff 100%);
-        }
-
-        .text-pacifico {
-            font-family: 'Pacifico', cursive;
-            background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        #copy:hover {
-            transition: all 0.1s ease-in-out;
-            transform: translateY(-5px);
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
+<body id="body" class="theme">
     <section id="splitAndJoin" class="mb-3">
-        <h1 class="m-auto text-center p-10 text-pacifico">Split & Join Strings</h1>
+        <h1 id="titleText" class="m-auto text-center p-10 title-text title-text-basic">Split & Join Strings</h1>
+        <div id="mode" class="bg-green-light theme">
+            <button class="focus:outline-none" onclick="toggleMode(event)">
+                <h2 id="horse" class="animated bounceIn">🐴</h2>
+            </button>
+
+            <button class="focus:outline-none" onclick="toggleMode(event)">
+                <h2 id="unicorn" class="hidden animated bounceIn">🦄</h2>
+            </button>
+        </div>
+
+
         <div class="m-auto w-5/6">
 
             <textarea id="textInput"
                 class="h-64 rounded overflow-hidden shadow-lg bg-grey-lighter w-full py-2 px-4 text-grey-darker focus:outline-none focus:bg-white"
                 onkeypress="updateText()" onblur="updateText()"></textarea>
 
-            <div class="flex mt-5 text-center">
-                <div class="block text-blue font-bold my-5 w-1/6 text-center">
+            <div class="md:flex lg:flex mt-5 text-center">
+
+                <div id="oldSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center theme">
                     Old separator
                 </div>
-                <input id="separatorOld"
-                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
-                    placeholder="Default: new line (\n)" onkeypress="updateText()" onblur="updateText()">
-                <div class="block text-blue font-bold my-5 w-1/6 text-center">
+                <input id="oldSeparatorInput"
+                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
+                    placeholder="Default: new line (\n)">
+
+                <div id="newSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center theme">
                     New separator
                 </div>
-                <input id="separatorNew"
-                    class="shadow rounded w-4/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
-                    placeholder="Default: ," onkeypress="updateText()" onblur="updateText()">
+                <input id="newSeparatorInput"
+                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
+                    placeholder="Default: ,">
+
+            </div>
+
+            <div class="my-10 text-center">
+                <button id="transformButton"
+                    class="bg-blue-dark hover:bg-blue-darker text-white font-bold py-2 px-4 mx-3 rounded-full w-2/6 focus:outline-none theme"
+                    onclick="transform()">
+                    <p id="transformAnimated">✨Transform</p>
+                </button>
             </div>
 
             <textarea id="joined"
-                class="block text-grey-darker w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-grey-lighter h-24"
+                class="block text-grey-darker w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-grey-lighter h-24 focus:outline-none theme"
                 placeholder="Your joined text will appear here" readonly></textarea>
 
             <div class="m-auto text-center">
-                <button id="copy" class="bg-orange hover:bg-blue text-white font-bold py-2 px-4 mx-3 rounded-full w-2/6"
-                    onclick="copy()">
-                    📄 Copy
-                </button>
-                <button id="copy" class="bg-pink hover:bg-blue text-white font-bold py-2 px-4 mx-3 rounded-full w-2/6"
+                <button id="removeDuplicatesButton"
+                    class="bg-blue-dark hover:bg-blue-darker text-white font-bold py-2 px-4 mx-3 my-2 rounded-full w-2/6 focus:outline-none theme"
                     onclick="removeDuplicates()">
-                    👯 Remove Duplicates
+                    <div id="removeDuplicatesAnimated">👯 Remove duplicates</div>
+                </button>
+                <button id="copyButton"
+                    class="bg-blue-dark hover:bg-blue-darker text-white font-bold py-2 px-4 mx-3 my-2 rounded-full w-2/6 focus:outline-none theme"
+                    onclick="copy()">
+                    <div id="copyAnimated">📄 Copy to clipboard</div>
                 </button>
             </div>
 
-            <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden">
+            <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden theme">
                 Duplication info
             </div>
             <div id="duplicateInfo" class="block text-grey-darker w-full py-2 px-2 leading-tight">
@@ -82,6 +90,20 @@
         </div>
     </section>
 
+    <footer class="flex m-auto text-center mt-20 mb-5 border-t mx-5">
+        <div class="w-full text-grey-darker mt-10">
+            Made with
+            <img src="https://github.githubassets.com/images/modules/logos_page/Octocat.png" width="30">
+            <a href="https://pages.github.com/" target="_blank">Github Pages</a>
+            &
+            <img src="https://tailwindcss.com/favicon-32x32.png" width="30">
+            <a href="https://tailwindcss.com" target="_blank">Tailwind CSS</a>
+
+            <img src="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/2728.png" width="30"
+                class="ml-2"> icon from
+            <a href="https://www.joypixels.com/" target="_blank">joypixels</a>
+        </div>
+    </footer>
     <script src="script.js"></script>
 </body>
 
