@@ -7,6 +7,12 @@ function updateText() {
 function transform() {
     animate("transformAnimated");
     updateText();
+    const inputText = getInputText();
+    if (inputText.length > new Set(inputText).size) {
+        document.getElementById("foundDuplicates").classList.remove("hidden");
+    } else {
+        document.getElementById("foundDuplicates").classList.add("hidden");
+    }
 }
 
 function copy() {
@@ -117,17 +123,20 @@ function animate(elementId) {
 }
 
 function getJoinedText() {
+    let formattedArray = getInputText();
+    let separatorNew = getNewSeparator();
+    const joinedText = formattedArray.join(separatorNew);
+    return joinedText;
+}
+
+function getInputText() {
     const inputText = document.getElementById("textInput").value;
 
     let separatorOld = getOldSeparator();
     const inputArray = inputText.split(separatorOld);
 
-    const trim = true;
-    let formattedArray = trim ? inputArray.map(x => x.trim()) : inputArray;
-
-    let separatorNew = getNewSeparator();
-    const joinedText = formattedArray.join(separatorNew);
-    return joinedText;
+    const trim = true; // toggle
+    return trim ? inputArray.map(x => x.trim()) : inputArray;
 }
 
 function getNewSeparator() {
