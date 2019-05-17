@@ -21,8 +21,9 @@
 
 <body id="body" class="theme">
     <section id="splitAndJoin" class="mb-3">
-        <h1 id="titleText" class="m-auto text-center p-10 title-text title-text-basic">Split & Join Strings</h1>
-        <div id="mode" class="bg-green-light theme">
+        <h1 id="titleText" class="m-auto text-center p-10 text-4xl title-text title-text-basic">Split & Join Strings
+        </h1>
+        <div id="mode" class="bg-green-500 theme text-3xl">
             <button class="focus:outline-none" onclick="toggleMode(event)">
                 <h2 id="horse" class="animated bounceIn">🐴</h2>
             </button>
@@ -36,7 +37,7 @@
         <div class="m-auto w-5/6">
 
             <textarea id="textInput"
-                class="h-64 rounded overflow-hidden shadow-lg bg-grey-lighter w-full py-2 px-4 text-grey-darker focus:outline-none focus:bg-white"
+                class="h-64 rounded shadow-lg bg-grey-400 w-full py-2 px-4 text-grey-800 focus:outline-none focus:bg-white"
                 onkeypress="updateText()" onblur="updateText()"></textarea>
 
             <div class="md:flex lg:flex mt-5 text-center">
@@ -45,38 +46,38 @@
                     Old separator
                 </div>
                 <input id="oldSeparatorInput"
-                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
+                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-grey-400 text-grey-800 focus:outline-none focus:bg-white"
                     placeholder="Default: new line (\n)">
 
                 <div id="newSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center theme">
                     New separator
                 </div>
                 <input id="newSeparatorInput"
-                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-grey-lighter text-grey-darker focus:outline-none focus:bg-white"
+                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-grey-400 text-grey-800 focus:outline-none focus:bg-white"
                     placeholder="Default: ,">
 
             </div>
 
             <div class="my-10 text-center">
                 <button id="transformButton"
-                    class="bg-blue-dark hover:bg-blue-darker text-white font-bold py-2 px-4 mx-3 rounded-full w-2/6 focus:outline-none theme"
+                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none theme"
                     onclick="transform()">
-                    <p id="transformAnimated">✨Transform</p>
+                    <div id="transformAnimated">✨Transform</div>
                 </button>
             </div>
 
             <textarea id="joined"
-                class="block text-grey-darker w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-grey-lighter h-24 focus:outline-none theme"
+                class="block text-grey-600 w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-grey-400 h-24 focus:outline-none theme"
                 placeholder="Your joined text will appear here" readonly></textarea>
 
             <div class="m-auto text-center">
                 <button id="removeDuplicatesButton"
-                    class="bg-blue-dark hover:bg-blue-darker text-white font-bold py-2 px-4 mx-3 my-2 rounded-full w-2/6 focus:outline-none theme"
+                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none theme"
                     onclick="removeDuplicates()">
                     <div id="removeDuplicatesAnimated">👯 Remove duplicates</div>
                 </button>
                 <button id="copyButton"
-                    class="bg-blue-dark hover:bg-blue-darker text-white font-bold py-2 px-4 mx-3 my-2 rounded-full w-2/6 focus:outline-none theme"
+                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none theme"
                     onclick="copy()">
                     <div id="copyAnimated">📄 Copy to clipboard</div>
                 </button>
@@ -85,14 +86,14 @@
             <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden theme">
                 Duplication info
             </div>
-            <div id="duplicateInfo" class="block text-grey-darker w-full py-2 px-2 leading-tight">
+            <div id="duplicateInfo" class="block text-grey-800 w-full py-2 px-2 leading-tight">
             </div>
 
         </div>
     </section>
 
     <footer class="flex m-auto text-center mt-20 mb-5 border-t mx-5">
-        <div class="w-full text-grey-darker mt-10">
+        <div class="w-full text-grey-800 mt-10">
             Made with
             <a href="https://pages.github.com/" target="_blank">Github Pages</a>,
             <a href="https://tailwindcss.com">Tailwind CSS</a>

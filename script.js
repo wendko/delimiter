@@ -35,34 +35,34 @@ function removeDuplicates() {
 
 const themeLibrary = {
     horse: {
-        transformButton: ['bg-blue-dark'],
-        removeDuplicatesButton: ['bg-blue-dark'],
-        copyButton: ['bg-blue-dark'],
+        transformButton: ['bg-blue-700'],
+        removeDuplicatesButton: ['bg-blue-700'],
+        copyButton: ['bg-blue-700'],
         body: ["none"],
-        mode: ["bg-green-light"],
+        mode: ["bg-green-400"],
         titleText: ["title-text-basic"],
-        oldSeparatorLabel: ["text-blue-dark"],
-        newSeparatorLabel: ["text-blue-dark"],
-        oldSeparatorInput: ["bg-grey-lighter"],
-        newSeparatorInput: ["bg-grey-lighter"],
-        textInput: ["bg-grey-lighter"],
+        oldSeparatorLabel: ["text-blue-700"],
+        newSeparatorLabel: ["text-blue-700"],
+        oldSeparatorInput: ["bg-grey-300"],
+        newSeparatorInput: ["bg-grey-300"],
+        textInput: ["bg-grey-300"],
         duplicateInfoTitle: ["text-blue"],
-        joined: ["bg-grey-lighter"]
+        joined: ["bg-grey-300"]
     },
     unicorn: {
-        transformButton: ['bg-orange'],
-        removeDuplicatesButton: ['bg-pink'],
-        copyButton: ['bg-indigo-light'],
+        transformButton: ['bg-orange-500'],
+        removeDuplicatesButton: ['bg-pink-500'],
+        copyButton: ['bg-indigo-400'],
         body: ["bg-colorful"],
-        mode: ["bg-pink-lighter"],
+        mode: ["bg-pink-300"],
         titleText: ["title-text-colorful"],
-        oldSeparatorLabel: ["text-pink-dark"],
-        newSeparatorLabel: ["text-pink-dark"],
-        oldSeparatorInput: ["bg-pink-lightest"],
-        newSeparatorInput: ["bg-pink-lightest"],
-        textInput: ["bg-orange-lightest"],
-        duplicateInfoTitle: ["text-orange-dark"],
-        joined: ["bg-indigo-lightest"]
+        oldSeparatorLabel: ["text-pink-700"],
+        newSeparatorLabel: ["text-pink-700"],
+        oldSeparatorInput: ["bg-pink-200"],
+        newSeparatorInput: ["bg-pink-200"],
+        textInput: ["bg-orange-200"],
+        duplicateInfoTitle: ["text-orange-700"],
+        joined: ["bg-indigo-200"]
     }
 }
 
