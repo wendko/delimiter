@@ -9,7 +9,7 @@
     -webkit-text-fill-color: transparent;
 }
 
-.title-text-colorful {
+.text-colorful {
     background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
      background-clip: text;
     -webkit-background-clip: text;
@@ -27,6 +27,12 @@
 
 }
 
+.credits:hover {
+     background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
+     background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 #mode {
     top: 0;

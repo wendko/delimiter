@@ -55,7 +55,7 @@ const themeLibrary = {
         copyButton: ['bg-indigo-400'],
         body: ["bg-colorful"],
         mode: ["bg-pink-300"],
-        titleText: ["title-text-colorful"],
+        titleText: ["text-colorful"],
         oldSeparatorLabel: ["text-pink-700"],
         newSeparatorLabel: ["text-pink-700"],
         oldSeparatorInput: ["bg-pink-200"],
