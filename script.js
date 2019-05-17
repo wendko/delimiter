@@ -1,6 +1,8 @@
 //#region Core functions
 function updateText() {
-    const joinedText = getJoinedText();
+    let formattedArray = getInputText();
+    document.getElementById("totalRecords").textContent = `Total: ${formattedArray.length} records`;
+    const joinedText = getJoinedText(formattedArray);
     document.getElementById("joined").value = joinedText;
 }
 
@@ -24,6 +26,7 @@ function copy() {
 function removeDuplicates() {
     animate("removeDuplicatesAnimated");
     document.getElementById("duplicateInfoTitle").classList.remove("hidden");
+    document.getElementById("foundDuplicates").classList.add("hidden");
 
     const original = document.getElementById("joined").value;
     if (!original) {
@@ -36,6 +39,7 @@ function removeDuplicates() {
     document.getElementById("duplicateInfo").innerHTML = getDuplicateItemInfo(originalItemsArray) || '';
 
     const uniqueValues = Array.from(new Set(originalItemsArray));
+    document.getElementById("totalRecords").textContent = `Total: ${uniqueValues.length} records`;
     document.getElementById("joined").value = uniqueValues.join(separatorNew);
 }
 
@@ -53,7 +57,8 @@ const themeLibrary = {
         newSeparatorInput: ["bg-grey-300"],
         textInput: ["bg-grey-300"],
         duplicateInfoTitle: ["text-blue"],
-        joined: ["bg-grey-300"]
+        joined: ["bg-grey-300"],
+        totalRecords: ["text-blue-700"]
     },
     unicorn: {
         transformButton: ['bg-orange-500'],
@@ -68,7 +73,8 @@ const themeLibrary = {
         newSeparatorInput: ["bg-pink-200"],
         textInput: ["bg-orange-200"],
         duplicateInfoTitle: ["text-orange-700"],
-        joined: ["bg-indigo-200"]
+        joined: ["bg-indigo-200"],
+        totalRecords: ["text-pink-600"]
     }
 }
 
@@ -122,8 +128,7 @@ function animate(elementId) {
     setTimeout(() => document.getElementById(elementId).classList.add(...animation), 0);
 }
 
-function getJoinedText() {
-    let formattedArray = getInputText();
+function getJoinedText(formattedArray) {
     let separatorNew = getNewSeparator();
     const joinedText = formattedArray.join(separatorNew);
     return joinedText;
