@@ -79,21 +79,43 @@ const themeLibrary = {
 }
 
 function toggleMode(event) {
-    // mode change
-    const oldMode = event.target.id;
-    const newMode = event.target.id === 'unicorn' ? 'horse' : 'unicorn';
-    document.getElementById(oldMode).classList.add('hidden');
-    document.getElementById(newMode).classList.remove('hidden')
 
-    // elements repaint
+    // mode change, prepare to repaint
+    const isUnicornToHorse = event.target.id === 'unicorn';
+    const oldMode = event.target.id;
+    const newMode = isUnicornToHorse ? 'horse' : 'unicorn';
+
+    const btnMode = document.getElementById('mode');
+    const modeAnimationClass = isUnicornToHorse ? 'mode-uni-to-horse' : 'mode-horse-to-uni';
+
     const oldTheme = themeLibrary[oldMode];
     const newTheme = themeLibrary[newMode];
     const elements = Object.keys(themeLibrary.horse);
-    elements.forEach(elementId => {
+
+    // repaint
+    btnMode.classList.add(modeAnimationClass);
+    setTimeout(() => {
+        // earlier repaint: elements repaint behind the animation. handle mode differently
+        elements.forEach(elementId => {
+            if (elementId === 'mode') {
+                return;
+            }
+            const element = document.getElementById(elementId);
+            element.classList.remove(...oldTheme[elementId]);
+            element.classList.add(...newTheme[elementId]);
+        });
+    }, 500);
+
+    setTimeout(() => {
+        // later repaint: update the other elements
+        btnMode.classList.remove(modeAnimationClass);
+        document.getElementById(oldMode).classList.add('hidden');
+        document.getElementById(newMode).classList.remove('hidden');
+        const elementId = 'mode';
         const element = document.getElementById(elementId);
         element.classList.remove(...oldTheme[elementId]);
         element.classList.add(...newTheme[elementId]);
-    })
+    }, 1000);
 }
 //#endregion
 

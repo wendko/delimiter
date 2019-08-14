@@ -1,3 +1,8 @@
+:root {
+    --tailwind-bg-green-500 : #48bb78;
+    --tailwind-bg-pink-300 : #fbb6ce;
+}
+
 .bg-colorful {
    background:  linear-gradient(to right, #afd2fb81 0%, #ffe9ff 100%);
 }
@@ -23,10 +28,6 @@
     -webkit-text-fill-color: transparent;
 }
 
-.none {
-
-}
-
 .credits:hover {
      background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
      background-clip: text;
@@ -40,6 +41,32 @@
     position: absolute;
     padding: 5px 10px 15px 15px;
     border-bottom-left-radius: 60px;
+}
+
+.mode-horse-to-uni {
+    animation: modeHorseToUni 1s ease-in-out;
+}
+
+.mode-uni-to-horse {
+    animation: modeUniToHorse 1s ease-in-out;
+}
+
+@keyframes modeHorseToUni {
+    0%, 100% {
+        box-shadow: 0px 0px var(--tailwind-bg-green-500);
+    }
+    50% {
+        box-shadow: 0px 0px 0px 150vw var(--tailwind-bg-green-500);
+    }
+}
+
+@keyframes modeUniToHorse {
+    0%, 100% {
+        box-shadow: 0px 0px var(--tailwind-bg-pink-300);
+    }
+    50% {
+        box-shadow: 0px 0px 0px 150vw var(--tailwind-bg-pink-300);
+    }
 }
 
 .theme {
