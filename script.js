@@ -166,8 +166,11 @@ function getInputText() {
     return trim ? inputArray.map(x => x.trim()) : inputArray;
 }
 
+const defaultNewSeparator = ',';
+const defaultOldSeparator = '';
+
 function getNewSeparator() {
-    let separatorNew = document.getElementById("newSeparatorInput").value || ',';
+    let separatorNew = document.getElementById("newSeparatorInput").value || defaultNewSeparator;
     if (['\\n', 'new line'].includes(separatorNew)) {
         separatorNew = '\n';
     }
@@ -175,6 +178,6 @@ function getNewSeparator() {
 }
 
 function getOldSeparator() {
-    return document.getElementById("oldSeparatorInput").value || '\n';
+    return document.getElementById("oldSeparatorInput").value || defaultOldSeparator;
 }
 //#endregion

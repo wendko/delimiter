@@ -19,11 +19,11 @@
     <base target="_blank">
 </head>
 
-<body id="body" class="theme">
+<body id="body">
     <section id="splitAndJoin" class="mb-3">
         <h1 id="titleText" class="m-auto text-center p-10 text-4xl title-text title-text-basic">Split & Join Strings
         </h1>
-        <div id="mode" class="bg-green-500 theme text-3xl">
+        <div id="mode" class="bg-green-500  text-3xl">
             <button class="focus:outline-none" onclick="toggleMode(event)">
                 <h2 id="horse" class="animated bounceIn">🐴</h2>
             </button>
@@ -42,56 +42,56 @@
 
             <div class="md:flex lg:flex mt-5 text-center">
 
-                <div id="oldSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center theme">
+                <div id="oldSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center ">
                     Old separator
                 </div>
-                <input id="oldSeparatorInput"
+                <textarea id="oldSeparatorInput"
                     class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-gray-300 text-gray-800 focus:outline-none focus:bg-white"
-                    placeholder="Default: new line (\n)">
+                    placeholder="Default: ''"></textarea>
 
-                <div id="newSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center theme">
+                <div id="newSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center ">
                     New separator
                 </div>
-                <input id="newSeparatorInput"
+                <textarea id="newSeparatorInput"
                     class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-gray-300 text-gray-800 focus:outline-none focus:bg-white"
-                    placeholder="Default: ,">
+                    placeholder="Default: ,"></textarea>
 
             </div>
 
             <div class="my-10 text-center">
                 <button id="transformButton"
-                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none theme"
+                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none "
                     onclick="transform()">
                     <div id="transformAnimated">✨Transform</div>
                 </button>
             </div>
 
             <textarea id="joined"
-                class="block text-gray-600 w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-gray-300 h-24 focus:outline-none theme"
+                class="block text-gray-600 w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-gray-300 h-24 focus:outline-none "
                 placeholder="Your joined text will appear here" readonly></textarea>
 
 
             <div class="m-auto text-center">
                 <button id="removeDuplicatesButton"
-                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none theme"
+                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none "
                     onclick="removeDuplicates()">
                     <div id="removeDuplicatesAnimated">👯 Remove duplicates</div>
                 </button>
                 <button id="copyButton"
-                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none theme"
+                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none "
                     onclick="copy()">
                     <div id="copyAnimated">📄 Copy to clipboard</div>
                 </button>
             </div>
 
-            <div id="totalRecords" class="block text-blue-700 text-center font-bold my-4 theme">
+            <div id="totalRecords" class="block text-blue-700 text-center font-bold my-4 ">
             </div>
 
-            <div id="foundDuplicates" class="block text-red-500 hidden text-center font-bold my-4 theme">
+            <div id="foundDuplicates" class="block text-red-500 hidden text-center font-bold my-4 ">
                 Found duplicates!
             </div>
 
-            <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden theme">
+            <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden ">
                 Duplication info
             </div>
             <div id="duplicateInfo" class="block text-gray-800 w-full py-2 px-2 leading-tight">
