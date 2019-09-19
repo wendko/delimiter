@@ -1,75 +1,108 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+* { 
+    font-family: 'Source Sans Pro', sans-serif;
+    text-align: center;
+}
+
 :root {
-    --tailwind-bg-green-500 : #48bb78;
-    --tailwind-bg-pink-300 : #fbb6ce;
+    --c-ta-border: grey;
 }
 
-.bg-colorful {
-   background:  linear-gradient(to right, #afd2fb81 0%, #ffe9ff 100%);
+
+.title {
+    font-size: 40px;
 }
 
-.title-text {
-    font-family: 'Pacifico', cursive;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.content {
+    column-gap: 20px;
+    grid-template-rows: repeat(9, 1fr);
 }
 
-.text-colorful {
-    background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
-     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+/* Shared styles */
+.app,
+.content,
+.controls,
+.input-controls,
+.output-controls,
+.separators,
+.original-text-container,
+.transformed-text-container,
+.duplicate-detail
+{
+    display: grid;
 }
 
-.title-text-basic {
-    background:  #3490dc;
-     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.app,
+.content,
+.separators {
+    place-items: center;
 }
 
-.credits:hover {
-     background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
-     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.input-controls,
+.output-controls {
+    align-self: start;
+    row-gap: 15px;
+    text-align: center;
 }
 
-#mode {
-    top: 0;
-    right: 0;
-    position: absolute;
-    padding: 5px 10px 15px 15px;
-    border-bottom-left-radius: 60px;
-    z-index: 2;
+.controls {
+    place-items: center;
+    row-gap: 15px;
 }
 
-.mode-horse-to-uni {
-    animation: modeHorseToUni 1s ease-in-out;
+.input-controls, .controls, .output-controls {
+    grid-row: 1 / span 9;
 }
 
-.mode-uni-to-horse {
-    animation: modeUniToHorse 1s ease-in-out;
+
+.original-text, .transformed-text {
+    height: 70vh;
 }
 
-@keyframes modeHorseToUni {
-    0%, 100% {
-        box-shadow: 0px 0px var(--tailwind-bg-green-500);
-    }
-    50% {
-        box-shadow: 0px 0px 0px 150vw var(--tailwind-bg-green-500);
-    }
+.old-separator-text, .new-separator-text {
+    width: 80%;
 }
 
-@keyframes modeUniToHorse {
-    0%, 100% {
-        box-shadow: 0px 0px var(--tailwind-bg-pink-300);
-    }
-    50% {
-        box-shadow: 0px 0px 0px 150vw var(--tailwind-bg-pink-300);
-    }
+/* Input control */
+.input-controls {
+    grid-column: 1;
 }
 
-* {
-    transition: all 0.1s ease-in;
+/* Center control */
+.controls {
+    grid-column: 2;
+}
+
+/* Output control */
+.output-controls {
+    grid-column: 3;
+}
+
+.duplicate-detail {
+    grid-row: 5 / span 4;
+    row-gap: 15px;
+}
+
+
+
+/* Element styles */
+textarea {
+    resize: none;
+    border: 1px solid var(--c-ta-border);
+    border-radius: 15px;
+    padding: 15px;
+}
+
+textarea[disabled] {
+    background: white;
+}
+
+label {
+    font-size: 20px;
+}
+
+button {
+    padding: 5px;
+    border-radius: 15px;    
 }
