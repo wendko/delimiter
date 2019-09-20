@@ -20,25 +20,30 @@
                 </textarea>
             </div>
             <div class="controls">
-                <label>Old Separator</label>
+                <label>< Old Separator</label>
                 <textarea class="old-separator-text" v-model="oldSeparator" 
                     v-bind:placeholder="oldSeparator === '' ? 'split by character' : ''">
                 </textarea>
-                <label>New Separator</label>
+                <label>New Separator ></label>
                 <textarea class="new-separator-text" v-model="newSeparator"
                     v-bind:placeholder="newSeparator === '' ? 'split by character' : ''">
                 </textarea>
-                <div class="duplicate-detail" v-if="separateDuplicates.duplicates.length">
-                    <label>Duplicates found!</label>
-                    <button type="button">Remove duplicates</button>
-                    <div v-for="dupe in separateDuplicates.duplicates">
-                        {{dupe}}
+                <div class="duplicate-detail" >
+                    <div v-if="separateDuplicates.duplicates.length">
+                        <button v-on:click="transformedText = 'hihi'">Remove duplicates?</button>
+                        <div class="duplicate-count">
+                            <div v-for="dupe in getDuplicateCount">
+                                <strong>Duplicate:</strong> {{dupe.name | handleWhiteSpace}}
+                                |
+                                <strong>Count:</strong> {{dupe.count}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="output-controls">
                 <label>Transformed text</label>
-                <textarea class="transformed-text" disabled v-model="transformedText"
+                <textarea class="transformed-text" v-model="transformedText"
                     placeholder="Your transformed text will appear here"></textarea>
             </div>
         </div>

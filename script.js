@@ -1,9 +1,27 @@
+Vue.filter('handleWhiteSpace', function (value) {
+    if (!value) { return '' }
+    // New line check must supercede whitespace check
+    if (value.match(/\n+/g)) {
+        return 'new line';
+    } else if (value.match(/\s+/g)) {
+        return 'whitespace';
+    } else {
+        return value;
+    }
+})
+
+
 const vm = new Vue({
     el: '#app',
     data: {
         originalText: 'a',
         oldSeparator: '',
         newSeparator: ',',
+    },
+    methods: {
+        removeDuplicates: function () {
+            this.transformedText = this.separateDuplicates.unique.join(this.newSeparator);
+        }
     },
     computed: {
         transformedText: function () {
@@ -25,9 +43,16 @@ const vm = new Vue({
             }, { unique: [], duplicates: [] });
         },
         getDuplicateCount: function () {
-            return this.separateDuplicates.reduce(x => {
-
+            return this.separateDuplicates.duplicates.reduce((acc, cur) => {
+                const existingEntry = acc.find(x => x.name === cur);
+                if (!existingEntry) {
+                    acc.push({ name: cur, count: 1 });
+                } else {
+                    existingEntry.count++;
+                }
+                return acc;
             }, []);
         }
     }
+
 });
