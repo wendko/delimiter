@@ -91,7 +91,6 @@
 }
 
 .transformed-text {
-    cursor: none;
     grid-row: 2 / span 7;
 }
 

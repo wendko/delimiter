@@ -14,19 +14,12 @@ Vue.filter('handleWhiteSpace', function (value) {
 const vm = new Vue({
     el: '#app',
     data: {
-        originalText: 'a',
+        originalText: '',
+        transformedText: '',
         oldSeparator: '',
         newSeparator: ',',
-        // transformedText: '',
     },
     methods: {
-        test: function () {
-            console.log('hihi');
-            console.log(this.transformedText);
-
-            this.transformedText = this.separateDuplicates.unique.join('!!');
-            console.log(this.transformedText);
-        },
         removeDuplicates: function () {
             this.transformedText = this.separateDuplicates.unique.join(this.newSeparator);
         },
@@ -35,15 +28,24 @@ const vm = new Vue({
             document.execCommand('copy');
         }
     },
-    computed: {
-        transformedText: {
-            get: function () {
-                return this.originalText
-                    .split(this.oldSeparator)
-                    .join(this.newSeparator);
-            },
-            set: function (newVal) { }
+    watch: {
+        originalText: function (originalText) {
+            this.transformedText = originalText
+                .split(this.oldSeparator)
+                .join(this.newSeparator);
         },
+        oldSeparator: function (oldSeparator) {
+            this.transformedText = this.originalText
+                .split(oldSeparator)
+                .join(this.newSeparator);
+        },
+        newSeparator: function (newSeparator) {
+            this.transformedText = this.originalText
+                .split(this.oldSeparator)
+                .join(newSeparator);
+        }
+    },
+    computed: {
         transformedTextArr: function () {
             return this.transformedText.split(this.newSeparator);
         },
@@ -69,5 +71,4 @@ const vm = new Vue({
             }, []);
         }
     }
-
 });
