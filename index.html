@@ -6,12 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico|Fira+Sans&display=swap" rel="stylesheet">
     <title>Join</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
-        <div class="title">Split & Join Strings</div>
+        <div class="title">
+            <span>Split</span>
+            <span>&</span>
+            <span>Join</span>
+            <span>Strings</span>
+        </div>
         <div class="content">
             <div class="input-controls">
                 <label>Original text</label>
@@ -21,27 +27,25 @@
             </div>
             <div class="controls">
                 <div>
-                    <label>Old Separator</label>
-                    <textarea class="old-separator-text" v-model="oldSeparator" 
-                        v-bind:placeholder="oldSeparator === '' ? 'split by character' : ''">
+                    <label>Old Delimiter</label>
+                    <textarea class="old-delimiter-text" v-model="oldDelimiter" 
+                        v-bind:placeholder="oldDelimiter === '' ? 'split by char' : ''">
                     </textarea>
                 </div>
                 <div>
-                    <label>New Separator</label>
-                    <textarea class="new-separator-text" v-model="newSeparator"
-                        v-bind:placeholder="newSeparator === '' ? 'split by character' : ''">
+                    <label>New Delimiter</label>
+                    <textarea class="new-delimiter-text" v-model="newDelimiter"
+                        v-bind:placeholder="newDelimiter === '' ? 'split by char' : ''">
                     </textarea>
                 </div>
                 <div class="duplicate-detail" >
-                    <div v-if="!separateDuplicates.duplicates.length">
-                        No duplicates so far
-                    </div>
-                    <div v-if="separateDuplicates.duplicates.length">
-                        <label>Duplicates</label>
-                        <div class="duplicate-count">
-                            <div v-for="dupe in getDuplicateCount">
-                                {{dupe.name | handleWhiteSpace}} ({{dupe.count}} occurences)
-                            </div>
+                    <label>Duplicates</label>
+                    <div class="duplicate-count">
+                        <div v-if="!separateDuplicates.duplicates.length">
+                            None
+                        </div>
+                        <div v-for="dupe in getDuplicateCount">
+                            {{dupe.name | handleWhiteSpace}} ({{dupe.count}} occurences)
                         </div>
                     </div>
                 </div>
@@ -51,8 +55,8 @@
                 <textarea id="transformedText" class="transformed-text" v-model="transformedText"
                     placeholder="Your transformed text will appear here"></textarea>
                 <div class="transformed-text-actions">
-                    <button @click="removeDuplicates">Remove duplicates</button>
-                    <button @click="copy">Copy</button>
+                    <button type="button" @click="removeDuplicates">Remove duplicates</button>
+                    <button type="button" @click="copy">Copy</button>
                 </div>
             </div>
         </div>

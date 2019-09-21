@@ -33,7 +33,7 @@ function removeDuplicates() {
         return;
     }
 
-    let separatorNew = getNewSeparator();
+    let separatorNew = getnewDelimiter();
     const originalItemsArray = original.split(separatorNew);
 
     document.getElementById("duplicateInfo").innerHTML = getDuplicateItemInfo(originalItemsArray) || '';
@@ -51,10 +51,10 @@ const themeLibrary = {
         body: ["none"],
         mode: ["bg-green-400"],
         titleText: ["title-text-basic"],
-        oldSeparatorLabel: ["text-blue-700"],
-        newSeparatorLabel: ["text-blue-700"],
-        oldSeparatorInput: ["bg-grey-300"],
-        newSeparatorInput: ["bg-grey-300"],
+        oldDelimiterLabel: ["text-blue-700"],
+        newDelimiterLabel: ["text-blue-700"],
+        oldDelimiterInput: ["bg-grey-300"],
+        newDelimiterInput: ["bg-grey-300"],
         textInput: ["bg-grey-300"],
         duplicateInfoTitle: ["text-blue"],
         joined: ["bg-grey-300"],
@@ -67,10 +67,10 @@ const themeLibrary = {
         body: ["bg-colorful"],
         mode: ["bg-pink-300"],
         titleText: ["text-colorful"],
-        oldSeparatorLabel: ["text-pink-700"],
-        newSeparatorLabel: ["text-pink-700"],
-        oldSeparatorInput: ["bg-pink-200"],
-        newSeparatorInput: ["bg-pink-200"],
+        oldDelimiterLabel: ["text-pink-700"],
+        newDelimiterLabel: ["text-pink-700"],
+        oldDelimiterInput: ["bg-pink-200"],
+        newDelimiterInput: ["bg-pink-200"],
         textInput: ["bg-orange-200"],
         duplicateInfoTitle: ["text-orange-700"],
         joined: ["bg-indigo-200"],
@@ -151,7 +151,7 @@ function animate(elementId) {
 }
 
 function getJoinedText(formattedArray) {
-    let separatorNew = getNewSeparator();
+    let separatorNew = getnewDelimiter();
     const joinedText = formattedArray.join(separatorNew);
     return joinedText;
 }
@@ -159,25 +159,25 @@ function getJoinedText(formattedArray) {
 function getInputText() {
     const inputText = document.getElementById("textInput").value;
 
-    let separatorOld = getOldSeparator();
+    let separatorOld = getoldDelimiter();
     const inputArray = inputText.split(separatorOld);
 
     const trim = true; // toggle
     return trim ? inputArray.map(x => x.trim()) : inputArray;
 }
 
-const defaultNewSeparator = ',';
-const defaultOldSeparator = '';
+const defaultnewDelimiter = ',';
+const defaultoldDelimiter = '';
 
-function getNewSeparator() {
-    let separatorNew = document.getElementById("newSeparatorInput").value || defaultNewSeparator;
+function getnewDelimiter() {
+    let separatorNew = document.getElementById("newDelimiterInput").value || defaultnewDelimiter;
     if (['\\n', 'new line'].includes(separatorNew)) {
         separatorNew = '\n';
     }
     return separatorNew;
 }
 
-function getOldSeparator() {
-    return document.getElementById("oldSeparatorInput").value || defaultOldSeparator;
+function getoldDelimiter() {
+    return document.getElementById("oldDelimiterInput").value || defaultoldDelimiter;
 }
 //#endregion

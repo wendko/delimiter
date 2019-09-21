@@ -16,12 +16,12 @@ const vm = new Vue({
     data: {
         originalText: '',
         transformedText: '',
-        oldSeparator: '',
-        newSeparator: ',',
+        oldDelimiter: '',
+        newDelimiter: ',',
     },
     methods: {
         removeDuplicates: function () {
-            this.transformedText = this.separateDuplicates.unique.join(this.newSeparator);
+            this.transformedText = this.separateDuplicates.unique.join(this.newDelimiter);
         },
         copy: function () {
             document.getElementById("transformedText").select();
@@ -31,23 +31,23 @@ const vm = new Vue({
     watch: {
         originalText: function (originalText) {
             this.transformedText = originalText
-                .split(this.oldSeparator)
-                .join(this.newSeparator);
+                .split(this.oldDelimiter)
+                .join(this.newDelimiter);
         },
-        oldSeparator: function (oldSeparator) {
+        oldDelimiter: function (oldDelimiter) {
             this.transformedText = this.originalText
-                .split(oldSeparator)
-                .join(this.newSeparator);
+                .split(oldDelimiter)
+                .join(this.newDelimiter);
         },
-        newSeparator: function (newSeparator) {
+        newDelimiter: function (newDelimiter) {
             this.transformedText = this.originalText
-                .split(this.oldSeparator)
-                .join(newSeparator);
+                .split(this.oldDelimiter)
+                .join(newDelimiter);
         }
     },
     computed: {
         transformedTextArr: function () {
-            return this.transformedText.split(this.newSeparator);
+            return this.transformedText.split(this.newDelimiter);
         },
         separateDuplicates: function () {
             return this.transformedTextArr.reduce((acc, cur) => {
