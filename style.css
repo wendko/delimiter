@@ -30,11 +30,13 @@
     color: var(--c-secondary);
 }
 
+.title>span:nth-child(2) {
+    font-size: 30px;
+}
+
 .content {
     padding: 10px 15px;
 }
-
-/* @media only screen and (max-width: 675px) */
 
 /* Shared styles */
 .app,
@@ -66,7 +68,6 @@
 
 @media only screen and (max-width: 700px) {
     .content {
-        grid-template-rows: repeat(4, 1fr);
         row-gap: 20px;
     }
 
@@ -147,6 +148,11 @@
     column-gap: 10px;
 }
 
+.heart {
+    color: red;
+    text-shadow: -12px -12px red;
+}
+
 /* Element styles */
 textarea:focus, button:focus {
     box-shadow: 0px 0px 5px 2px var(--c-focus);
@@ -167,13 +173,7 @@ button {
     border: 1px solid var(--c-border);
     font-size: 15px;
     color: var(--c-text-btn);
-    /* transition: all 2s ease-in; */
-    /* cursor: pointer; */
 }
-
-/* button:hover {
-    background: red;
-} */
 
 button:nth-child(1) {
     background: var(--c-primary);
@@ -185,4 +185,12 @@ button:nth-child(2) {
 
 button:active {
     transform: translateY(-5px);
+}
+
+textarea, button {
+    border-radius: 3px;
+}
+
+footer {
+    margin-top: 20px;
 }
