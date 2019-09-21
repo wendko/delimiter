@@ -7,18 +7,20 @@
 
 :root {
     --c-ta-border: grey;
-    --c-focus: #ff6666;
+    --c-focus: #fd19d7;
 }
-
 
 .title {
     font-size: 40px;
 }
 
 .content {
+    grid-template-columns: repeat(5, 1fr);
+    padding: 10px 15px;
     column-gap: 20px;
-    grid-template-rows: repeat(9, 1fr);
 }
+
+/* @media only screen and (max-width: 675px) */
 
 /* Shared styles */
 .app,
@@ -35,64 +37,72 @@
 }
 
 .app,
-.content,
 .separators {
     place-items: center;
 }
 
 .input-controls,
 .output-controls {
-    align-self: start;
     row-gap: 15px;
     text-align: center;
+    grid-template-rows: repeat(9, 1fr);
+}
+
+.input-controls { 
+    grid-column: 1 / span 2;   
+}
+
+.input-controls > textarea, .output-controls > textarea {
+    grid-row: 2 / span 8;
+}
+
+.input-controls > label, .output-controls > label {
+    align-self: center;
+}
+
+.output-controls { 
+    grid-column: 4 / span 2;   
 }
 
 .controls {
     place-items: center;
     row-gap: 15px;
-}
-
-.input-controls, .controls, .output-controls {
-    grid-row: 1 / span 9;
-    width: 30%;
-}
-
-
-.original-text, .transformed-text {
-    height: 70vh;
+    padding-top: 50px;
 }
 
 .old-separator-text, .new-separator-text {
     width: 80%;
-}
-
-/* Input control */
-.input-controls {
-    grid-column: 1;
-}
-
-/* Center control */
-.controls {
-    grid-column: 2;
-}
-
-/* Output control */
-.output-controls {
-    grid-column: 3;
+    margin-top: 10px;
+    height: 25px;
 }
 
 .duplicate-detail {
-    grid-row: 5 / span 4;
     row-gap: 15px;
     height: 200px;
+    width: 100%;
 }
 
 .duplicate-count {
     overflow: auto;
     height: 150px;
-    padding:10px;
-    border-radius: 15px;
+    padding: 5px;
     margin-top: 10px;
+    border: 1px solid var(--c-ta-border);
+}
+
+.transformed-text {
+    cursor: none;
+    grid-row: 2 / span 7;
+}
+
+.original-text {
+    grid-row: 2 / span 8;
+}
+
+.transformed-text-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
 }
 
 /* Element styles */
@@ -103,13 +113,9 @@ textarea:focus, button:focus {
 textarea {
     resize: none;
     border: 1px solid var(--c-ta-border);
-    border-radius: 15px;
     padding: 15px;
 }
 
-.transformed-text {
-    cursor: none;
-}
 
 label {
     font-size: 20px;
@@ -117,5 +123,4 @@ label {
 
 button {
     padding: 5px;
-    border-radius: 15px;    
 }

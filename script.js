@@ -17,17 +17,32 @@ const vm = new Vue({
         originalText: 'a',
         oldSeparator: '',
         newSeparator: ',',
+        // transformedText: '',
     },
     methods: {
+        test: function () {
+            console.log('hihi');
+            console.log(this.transformedText);
+
+            this.transformedText = this.separateDuplicates.unique.join('!!');
+            console.log(this.transformedText);
+        },
         removeDuplicates: function () {
             this.transformedText = this.separateDuplicates.unique.join(this.newSeparator);
+        },
+        copy: function () {
+            document.getElementById("transformedText").select();
+            document.execCommand('copy');
         }
     },
     computed: {
-        transformedText: function () {
-            return this.originalText
-                .split(this.oldSeparator)
-                .join(this.newSeparator);
+        transformedText: {
+            get: function () {
+                return this.originalText
+                    .split(this.oldSeparator)
+                    .join(this.newSeparator);
+            },
+            set: function (newVal) { }
         },
         transformedTextArr: function () {
             return this.transformedText.split(this.newSeparator);
