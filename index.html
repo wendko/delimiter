@@ -1,117 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
-    <meta name="author" content="wendko">
-    <meta name="description" content="Split & join text">
-    <meta name="keywords" content="split,join,text">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="icon" type="image/png" href="https://cdnjs.cloudflare.com/ajax/libs/emojione/2.2.7/assets/png/2728.png">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
-        integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
-    <title>Join</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
-    <base target="_blank">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nova+Mono|VT323|Pacifico|Fira+Mono&display=swap" rel="stylesheet">
+    <title>Delimiter</title>
+    <link href="style.css" rel="stylesheet">
 </head>
-
-<body id="body">
-    <section id="splitAndJoin" class="mb-3">
-        <h1 id="titleText" class="m-auto text-center p-10 text-4xl title-text title-text-basic">Split & Join Strings
-        </h1>
-        <div id="mode" class="bg-green-500  text-3xl">
-            <button class="focus:outline-none" onclick="toggleMode(event)">
-                <h2 id="horse" class="animated bounceIn">🐴</h2>
-            </button>
-
-            <button class="focus:outline-none" onclick="toggleMode(event)">
-                <h2 id="unicorn" class="hidden animated bounceIn">🦄</h2>
-            </button>
+<body>
+    <div id="app">
+        <div class="theme-toggle">
+            <input type="checkbox" id="themeCheckbox" class="theme-checkbox" v-model="coloredTheme"></input>
+            <label for="themeCheckbox" class="theme-icon">
+                {{coloredTheme ? '🦄' : '🐴'}}
+            </label>
         </div>
-
-
-        <div class="m-auto w-5/6">
-
-            <textarea id="textInput"
-                class="h-64 rounded shadow-lg bg-gray-300 w-full py-2 px-4 text-gray-800 focus:outline-none focus:bg-white"
-                onkeypress="updateText()" onblur="updateText()"></textarea>
-
-            <div class="md:flex lg:flex mt-5 text-center">
-
-                <div id="oldSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center ">
-                    Old separator
+        <div class="title">
+            &nbsp;Delimiter&nbsp;
+        </div>
+        <div class="subtitle">
+            <span>split</span>
+            <span>&</span>
+            <span>join</span>
+            <span>strings</span>
+        </div>
+        <div class="content">
+            <div class="input-controls">
+                <label>Original text</label>
+                <textarea class="original-text" v-model="originalText"
+                    placeholder="Put your text here">
+                </textarea>
+            </div>
+            <div class="controls">
+                <div>
+                    <label>Old Delimiter</label>
+                    <textarea class="old-delimiter-text" v-model="oldDelimiter" 
+                        v-bind:placeholder="oldDelimiter.length < 1 ? 'None' : ''">
+                    </textarea>
                 </div>
-                <textarea id="oldSeparatorInput"
-                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-gray-300 text-gray-800 focus:outline-none focus:bg-white"
-                    placeholder="Default: ''"></textarea>
-
-                <div id="newSeparatorLabel" class="block text-blue-dark font-bold my-5 w-1/2 text-center ">
-                    New separator
+                <div>
+                    <label>New Delimiter</label>
+                    <textarea class="new-delimiter-text" v-model="newDelimiter"
+                        v-bind:placeholder="newDelimiter.length < 1 ? 'None' : ''">
+                    </textarea>
                 </div>
-                <textarea id="newSeparatorInput"
-                    class="shadow rounded w-5/6 py-2 px-3 shadow-lg bg-gray-300 text-gray-800 focus:outline-none focus:bg-white"
-                    placeholder="Default: ,"></textarea>
-
+                <div class="duplicate-detail" >
+                    <label>Duplicates</label>
+                    <div class="duplicate-count">
+                        <div v-if="!separateDuplicates.duplicates.length">
+                            <span class="duplicate-placeholder">None</span>
+                        </div>
+                        <div v-for="dupe in getDuplicateCount">
+                            {{dupe.name | handleWhiteSpace}} ({{dupe.count}} extras)
+                        </div>
+                    </div>
+                </div>
             </div>
-
-            <div class="my-10 text-center">
-                <button id="transformButton"
-                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none "
-                    onclick="transform()">
-                    <div id="transformAnimated">✨Transform</div>
-                </button>
+            <div class="output-controls">
+                <label>Transformed text</label>
+                <textarea id="transformedText" class="transformed-text" v-model="transformedText"
+                    placeholder="Your transformed text will appear here"></textarea>
+                <div class="transformed-text-actions">
+                    <button type="button" @click="removeDuplicates">Remove duplicates</button>
+                    <button type="button" @click="copy">Copy</button>
+                </div>
             </div>
-
-            <textarea id="joined"
-                class="block text-gray-600 w-full mt-10 mb-5 py-2 px-4 shadow-lg bg-gray-300 h-24 focus:outline-none "
-                placeholder="Your joined text will appear here" readonly></textarea>
-
-
-            <div class="m-auto text-center">
-                <button id="removeDuplicatesButton"
-                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none "
-                    onclick="removeDuplicates()">
-                    <div id="removeDuplicatesAnimated">👯 Remove duplicates</div>
-                </button>
-                <button id="copyButton"
-                    class="bg-blue-700 hover:bg-blue-800 text-white font-bold py-2 px-4 mx-3 my-2 rounded-full focus:outline-none "
-                    onclick="copy()">
-                    <div id="copyAnimated">📄 Copy to clipboard</div>
-                </button>
-            </div>
-
-            <div id="totalRecords" class="block text-blue-700 text-center font-bold my-4 ">
-            </div>
-
-            <div id="foundDuplicates" class="block text-red-500 hidden text-center font-bold my-4 ">
-                Found duplicates!
-            </div>
-
-            <div id="duplicateInfoTitle" class="block text-blue font-bold mt-4 hidden ">
-                Duplication info
-            </div>
-            <div id="duplicateInfo" class="block text-gray-800 w-full py-2 px-2 leading-tight">
-            </div>
-
         </div>
-    </section>
-
-    <footer class="flex m-auto text-center mt-20 mb-5 mx-5">
-        <div class="w-full text-gray-800 mt-10">
-            Made with
-            <a href="https://pages.github.com/" class="font-extrabold underline credits">Github Pages</a>,
-            <a href="https://tailwindcss.com" class="font-extrabold underline credits">Tailwind CSS</a>
-            & <a href="https://daneden.github.io/animate.css/" class="font-extrabold underline credits">Animate CSS</a>
-            <br>
-            Icon from
-            <a href="https://www.joypixels.com/" class="font-extrabold underline credits">joypixels</a>
-        </div>
+    </div>
+    <footer>Built with <a href="https://vuejs.org/" target="_blank">Vue</a>
+         by <a href="https://www.twitter.com/wendko" target="_blank">wendko</a> 
+        <span class="heart">❤</span>
+        Hosted on Netlify
     </footer>
-    <script src="script.js"></script>
+    <script src="./script.js" defer></script>
 </body>
-
 </html>

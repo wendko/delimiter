@@ -1,75 +1,283 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+
+* { 
+    font-family: 'Fira Mono', monospace;
+    text-align: center;
+}
+
 :root {
-    --tailwind-bg-green-500 : #48bb78;
-    --tailwind-bg-pink-300 : #fbb6ce;
+    --horse-c-icon-bg: #5e925c;
+    --horse-c-border: #5e925c;  
+    --horse-c-focus: #aaaaaa;
+    --horse-c-primary: #b84416;
+    --horse-c-secondary: #005304;
+    --horse-c-text-title: white;
+    --horse-c-text-btn: white;  
+    --horse-c-text-label: #005304;  
+    --horse-c-heart: red;
+
+    --unicorn-c-icon-bg: #ff91f0;
+    --unicorn-c-border: #ff91f0;  
+    --unicorn-c-focus: #ffe550;
+    --unicorn-c-primary: #df0082;
+    --unicorn-c-secondary: #b200c2;
+    --unicorn-c-text-title: white;
+    --unicorn-c-text-btn: white;  
+    --unicorn-c-text-label: #df0082;  
+    --unicorn-c-heart: #b200c2;
+    
+    --c-icon-bg: var(--horse-c-icon-bg);
+    --c-border: var(--horse-c-border);
+    --c-focus: var(--horse-c-focus);
+    --c-primary: var(--horse-c-primary);
+    --c-secondary: var(--horse-c-secondary);
+    --c-text-title: var(--horse-c-text-title);
+    --c-text-btn: var(--horse-c-text-btn);
+    --c-text-label: var(--horse-c-text-label);
+    --c-heart: var(--horse-c-heart);
 }
 
-.bg-colorful {
-   background:  linear-gradient(to right, #afd2fb81 0%, #ffe9ff 100%);
+/* Container styles */
+.app,
+.content,
+.controls,
+.input-controls,
+.output-controls,
+.original-text-container,
+.transformed-text-container,
+.duplicate-detail
+{
+    display: grid;
 }
 
-.title-text {
-    font-family: 'Pacifico', cursive;
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.app {
+    place-items: center;
+    margin: 20px;
 }
 
-.text-colorful {
-    background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
-     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.content {
+    padding: 10px 15px;
 }
 
-.title-text-basic {
-    background:  #3490dc;
-     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.input-controls,
+.output-controls {
+    row-gap: 15px;
+    text-align: center;
+    grid-template-rows: repeat(9, 1fr);
 }
 
-.credits:hover {
-     background: linear-gradient(to right, #f6993f 40%, #f66d9b 50%, #3490dc 60%);
-     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+.input-controls > textarea, .output-controls > textarea {
+    grid-row: 2 / span 8;
 }
 
-#mode {
-    top: 0;
-    right: 0;
+@media only screen and (max-width: 700px) {
+    .content {
+        row-gap: 20px;
+    }
+
+    .input-controls {
+        grid-row: 1;
+    }
+
+    .controls {
+        grid-row: 2;
+        padding-top: 0px;
+    }
+
+    .output-controls {
+        grid-row: 3;
+    }
+
+    .theme-icon {
+        font-size: 15px;
+    }
+}
+
+@media only screen and (min-width: 701px) {
+    .content {
+        grid-template-columns: repeat(5, 1fr);
+        column-gap: 20px;
+    }
+
+    .input-controls {
+        grid-column: 1 / span 2;   
+    }
+
+    .controls {
+        grid-column: 3;
+        padding-top: 50px;
+    }
+
+    .output-controls {
+        grid-column: 4 / span 2;   
+    }
+
+    .theme-icon {
+        font-size: 25px;
+    }
+}
+
+
+.input-controls > label, .output-controls > label {
+    align-self: center;
+}
+
+.controls {
+    place-items: center;
+    row-gap: 15px;
+}
+
+/* Element styles */
+.theme-checkbox:focus + .theme-icon  {
+    box-shadow: 0px 0px 5px 2px var(--c-focus);
+}
+
+.theme-checkbox:hover + .theme-icon  {
+    transform: scale(1.5);
+}
+
+.theme-icon {
+    background: var(--c-icon-bg);
+    padding: 10px;
+    right: 0px;
+    top: 0px;
+    border-radius: 0px 0px 0px 30px;
+    transition: all 0.1s linear;
+}
+
+.theme-toggle > * {
     position: absolute;
-    padding: 5px 10px 15px 15px;
-    border-bottom-left-radius: 60px;
-    z-index: 2;
 }
 
-.mode-horse-to-uni {
-    animation: modeHorseToUni 1s ease-in-out;
+.theme-checkbox {
+    top: 0px;
+    right: 0px;
+    height:50px;
+    width:50px;
+    z-index: 1;
+    opacity: 0;
 }
 
-.mode-uni-to-horse {
-    animation: modeUniToHorse 1s ease-in-out;
+.title {
+    color: var(--c-text-title);
+    font-size: 40px;
+    display: inline;
+    background: var(--c-secondary);
 }
 
-@keyframes modeHorseToUni {
-    0%, 100% {
-        box-shadow: 0px 0px var(--tailwind-bg-green-500);
-    }
-    50% {
-        box-shadow: 0px 0px 0px 150vw var(--tailwind-bg-green-500);
-    }
+.title:hover {
+    background: var(--c-primary);
 }
 
-@keyframes modeUniToHorse {
-    0%, 100% {
-        box-shadow: 0px 0px var(--tailwind-bg-pink-300);
-    }
-    50% {
-        box-shadow: 0px 0px 0px 150vw var(--tailwind-bg-pink-300);
-    }
+.title:hover + .subtitle {
+    word-spacing: -2px;
 }
 
-* {
-    transition: all 0.1s ease-in;
+.subtitle > span {
+    font-size: 20px;
+}
+
+.subtitle {
+    word-spacing: 10px;
+}
+
+.subtitle>span:nth-child(odd) {
+    color: var(--c-primary);
+}
+
+.subtitle>span:nth-child(even) {
+    color: var(--c-secondary);
+}
+
+.old-delimiter-text, .new-delimiter-text {
+    width: 80%;
+    margin-top: 10px;
+    height: 25px;
+}
+
+.duplicate-detail {
+    height: 200px;
+    width: 100%;
+}
+
+.duplicate-count {
+    overflow: auto;
+    height: 150px;
+    padding: 5px;
+    margin-top: 10px;
+    border: 1px solid var(--c-border);
+}
+
+.duplicate-placeholder  {
+    color: lightgray;
+}
+
+.transformed-text {
+    grid-row: 2 / span 7;
+}
+
+.original-text {
+    grid-row: 2 / span 8;
+}
+
+.transformed-text-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 10px;
+}
+
+.heart {
+    color: var(--c-heart);
+    text-shadow: -12px -12px var(--c-heart);
+}
+
+/* Overriding default styles */
+textarea:focus, button:focus {
+    box-shadow: 0px 0px 5px 2px var(--c-focus);
+}
+
+textarea {
+    resize: none;
+    padding: 15px;
+}
+
+label {
+    font-size: 20px;
+    color: var(--c-text-label);
+}
+
+button {
+    padding: 10px 5px;
+    font-size: 15px;
+    color: var(--c-text-btn);
+    border: none;
+}
+
+button:nth-child(1) {
+    background: var(--c-primary);
+}
+
+button:nth-child(2) {
+    background: var(--c-secondary);
+}
+
+button:active {
+    transform: translateY(-5px);
+}
+
+a {
+    color: var(--c-primary);
+}
+
+textarea, button, .title, .duplicate-count {
+    border-radius: 3px;
+}
+
+textarea, .duplicate-count {
+    border: 2px solid var(--c-border);
+}
+
+footer {
+    margin-top: 20px;
+    color: var(--c-text-label);
 }

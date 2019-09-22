@@ -1,183 +1,94 @@
-//#region Core functions
-function updateText() {
-    let formattedArray = getInputText();
-    document.getElementById("totalRecords").textContent = `Total: ${formattedArray.length} records`;
-    const joinedText = getJoinedText(formattedArray);
-    document.getElementById("joined").value = joinedText;
-}
-
-function transform() {
-    animate("transformAnimated");
-    updateText();
-    const inputText = getInputText();
-    if (inputText.length > new Set(inputText).size) {
-        document.getElementById("foundDuplicates").classList.remove("hidden");
+Vue.filter('handleWhiteSpace', function (value) {
+    if (!value) { return '' }
+    // New line check must supercede whitespace check
+    if (value.match(/\n+/g)) {
+        return 'new line';
+    } else if (value.match(/\s+/g)) {
+        return 'whitespace';
     } else {
-        document.getElementById("foundDuplicates").classList.add("hidden");
+        return value;
     }
-}
+})
 
-function copy() {
-    animate("copyAnimated");
-    document.getElementById("joined").select();
-    document.execCommand('copy');
-}
 
-function removeDuplicates() {
-    animate("removeDuplicatesAnimated");
-    document.getElementById("duplicateInfoTitle").classList.remove("hidden");
-    document.getElementById("foundDuplicates").classList.add("hidden");
-
-    const original = document.getElementById("joined").value;
-    if (!original) {
-        return;
-    }
-
-    let separatorNew = getNewSeparator();
-    const originalItemsArray = original.split(separatorNew);
-
-    document.getElementById("duplicateInfo").innerHTML = getDuplicateItemInfo(originalItemsArray) || '';
-
-    const uniqueValues = Array.from(new Set(originalItemsArray));
-    document.getElementById("totalRecords").textContent = `Total: ${uniqueValues.length} records`;
-    document.getElementById("joined").value = uniqueValues.join(separatorNew);
-}
-
-const themeLibrary = {
-    horse: {
-        transformButton: ['bg-blue-700'],
-        removeDuplicatesButton: ['bg-blue-700'],
-        copyButton: ['bg-blue-700'],
-        body: ["none"],
-        mode: ["bg-green-400"],
-        titleText: ["title-text-basic"],
-        oldSeparatorLabel: ["text-blue-700"],
-        newSeparatorLabel: ["text-blue-700"],
-        oldSeparatorInput: ["bg-grey-300"],
-        newSeparatorInput: ["bg-grey-300"],
-        textInput: ["bg-grey-300"],
-        duplicateInfoTitle: ["text-blue"],
-        joined: ["bg-grey-300"],
-        totalRecords: ["text-blue-700"]
+const vm = new Vue({
+    el: '#app',
+    data: {
+        originalText: '',
+        transformedText: '',
+        oldDelimiter: '',
+        newDelimiter: ',',
+        coloredTheme: false,
     },
-    unicorn: {
-        transformButton: ['bg-orange-500'],
-        removeDuplicatesButton: ['bg-pink-500'],
-        copyButton: ['bg-indigo-400'],
-        body: ["bg-colorful"],
-        mode: ["bg-pink-300"],
-        titleText: ["text-colorful"],
-        oldSeparatorLabel: ["text-pink-700"],
-        newSeparatorLabel: ["text-pink-700"],
-        oldSeparatorInput: ["bg-pink-200"],
-        newSeparatorInput: ["bg-pink-200"],
-        textInput: ["bg-orange-200"],
-        duplicateInfoTitle: ["text-orange-700"],
-        joined: ["bg-indigo-200"],
-        totalRecords: ["text-pink-600"]
-    }
-}
-
-function toggleMode(event) {
-
-    // mode change, prepare to repaint
-    const isUnicornToHorse = event.target.id === 'unicorn';
-    const oldMode = event.target.id;
-    const newMode = isUnicornToHorse ? 'horse' : 'unicorn';
-
-    const btnMode = document.getElementById('mode');
-    const modeAnimationClass = isUnicornToHorse ? 'mode-uni-to-horse' : 'mode-horse-to-uni';
-
-    const oldTheme = themeLibrary[oldMode];
-    const newTheme = themeLibrary[newMode];
-    const elements = Object.keys(themeLibrary.horse);
-
-    // repaint
-    btnMode.classList.add(modeAnimationClass);
-    setTimeout(() => {
-        // earlier repaint: elements repaint behind the animation. handle mode differently
-        elements.forEach(elementId => {
-            if (elementId === 'mode') {
-                return;
-            }
-            const element = document.getElementById(elementId);
-            element.classList.remove(...oldTheme[elementId]);
-            element.classList.add(...newTheme[elementId]);
-        });
-    }, 500);
-
-    setTimeout(() => {
-        // later repaint: update the other elements
-        btnMode.classList.remove(modeAnimationClass);
-        document.getElementById(oldMode).classList.add('hidden');
-        document.getElementById(newMode).classList.remove('hidden');
-        const elementId = 'mode';
-        const element = document.getElementById(elementId);
-        element.classList.remove(...oldTheme[elementId]);
-        element.classList.add(...newTheme[elementId]);
-    }, 1000);
-}
-//#endregion
-
-//#region Helper functions
-function getDuplicateItemInfo(originalItemsArray) {
-    const duplicates = [];
-    for (let i = 0; i < originalItemsArray.length; i++) {
-        const currentItem = originalItemsArray[i];
-        if (duplicates.find(x => x.item === currentItem)) {
-            continue;
+    methods: {
+        removeDuplicates: function () {
+            this.transformedText = this.separateDuplicates.unique.join(this.newDelimiter);
+        },
+        copy: function () {
+            document.getElementById("transformedText").select();
+            document.execCommand('copy');
         }
-
-        const sliced = originalItemsArray.slice(i);
-        const occurences = sliced.filter(item => item === currentItem);
-
-        if (occurences.length > 1) {
-            duplicates.push({ item: currentItem, count: occurences.length });
+    },
+    watch: {
+        originalText: function (originalText) {
+            this.transformedText = originalText
+                .split(this.oldDelimiter)
+                .join(this.newDelimiter);
+        },
+        oldDelimiter: function (oldDelimiter) {
+            this.transformedText = this.originalText
+                .split(oldDelimiter)
+                .join(this.newDelimiter);
+        },
+        newDelimiter: function (newDelimiter) {
+            this.transformedText = this.originalText
+                .split(this.oldDelimiter)
+                .join(newDelimiter);
+        },
+        coloredTheme: function (isColoredTheme) {
+            const theme = isColoredTheme ? 'unicorn' : 'horse';
+            [
+                '--c-icon-bg',
+                '--c-border',
+                '--c-focus',
+                '--c-primary',
+                '--c-secondary',
+                '--c-text-btn',
+                '--c-text-label',
+                '--c-text-title',
+                '--c-heart'
+            ].forEach(cssVar => {
+                document.documentElement.style.setProperty(
+                    cssVar,
+                    `var(--${theme}-${cssVar.replace('--', '')})`
+                );
+            });
+        }
+    },
+    computed: {
+        transformedTextArr: function () {
+            return this.transformedText.split(this.newDelimiter);
+        },
+        separateDuplicates: function () {
+            return this.transformedTextArr.reduce((acc, cur) => {
+                if (acc.unique.includes(cur)) {
+                    acc.duplicates.push(cur);
+                } else {
+                    acc.unique.push(cur);
+                }
+                return acc;
+            }, { unique: [], duplicates: [] });
+        },
+        getDuplicateCount: function () {
+            return this.separateDuplicates.duplicates.reduce((acc, cur) => {
+                const existingEntry = acc.find(x => x.name === cur);
+                if (!existingEntry) {
+                    acc.push({ name: cur, count: 1 });
+                } else {
+                    existingEntry.count++;
+                }
+                return acc;
+            }, []);
         }
     }
-
-    if (duplicates.length === 0) {
-        return;
-    }
-
-    const reducer = (acc, x) => acc += `<br/>${x.item} (${x.count} occurences)`;
-    return duplicates.reduce(reducer, '');
-}
-
-function animate(elementId) {
-    const animation = ['animated', 'tada'];
-    document.getElementById(elementId).classList.remove(...animation);
-    setTimeout(() => document.getElementById(elementId).classList.add(...animation), 0);
-}
-
-function getJoinedText(formattedArray) {
-    let separatorNew = getNewSeparator();
-    const joinedText = formattedArray.join(separatorNew);
-    return joinedText;
-}
-
-function getInputText() {
-    const inputText = document.getElementById("textInput").value;
-
-    let separatorOld = getOldSeparator();
-    const inputArray = inputText.split(separatorOld);
-
-    const trim = true; // toggle
-    return trim ? inputArray.map(x => x.trim()) : inputArray;
-}
-
-const defaultNewSeparator = ',';
-const defaultOldSeparator = '';
-
-function getNewSeparator() {
-    let separatorNew = document.getElementById("newSeparatorInput").value || defaultNewSeparator;
-    if (['\\n', 'new line'].includes(separatorNew)) {
-        separatorNew = '\n';
-    }
-    return separatorNew;
-}
-
-function getOldSeparator() {
-    return document.getElementById("oldSeparatorInput").value || defaultOldSeparator;
-}
-//#endregion
+});
