@@ -169,21 +169,8 @@
     background: var(--c-primary);
 }
 
-@keyframes split {
-    0%, 100% {
-        word-spacing: 10px;
-
-    }
-    30% {
-        word-spacing: -2px;
-    }
-    60% {
-        word-spacing: 20px;
-    }
-}
-
 .title:hover + .subtitle {
-    animation: split 3s linear infinite;
+    word-spacing: -2px;
 }
 
 .subtitle > span {
@@ -276,6 +263,10 @@ button:nth-child(2) {
 
 button:active {
     transform: translateY(-5px);
+}
+
+a {
+    color: var(--c-primary);
 }
 
 textarea, button, .title, .duplicate-count {

@@ -37,13 +37,13 @@
                 <div>
                     <label>Old Delimiter</label>
                     <textarea class="old-delimiter-text" v-model="oldDelimiter" 
-                        v-bind:placeholder="oldDelimiter === '' ? 'split by char' : ''">
+                        v-bind:placeholder="oldDelimiter.length < 1 ? 'None' : ''">
                     </textarea>
                 </div>
                 <div>
                     <label>New Delimiter</label>
                     <textarea class="new-delimiter-text" v-model="newDelimiter"
-                        v-bind:placeholder="newDelimiter === '' ? 'split by char' : ''">
+                        v-bind:placeholder="newDelimiter.length < 1 ? 'None' : ''">
                     </textarea>
                 </div>
                 <div class="duplicate-detail" >
@@ -69,7 +69,8 @@
             </div>
         </div>
     </div>
-    <footer>Made with Vue by <a href="https://www.twitter.com/wendko">wendko</a> 
+    <footer>Built with <a href="https://vuejs.org/" target="_blank">Vue</a>
+         by <a href="https://www.twitter.com/wendko" target="_blank">wendko</a> 
         <span class="heart">❤</span>
         Hosted on Netlify
     </footer>
