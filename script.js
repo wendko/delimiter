@@ -57,12 +57,10 @@ const vm = new Vue({
                 '--c-text-label',
                 '--c-heart'
             ].forEach(cssVar => {
-                console.log(`var(--${theme}-${cssVar.replace('--', '')})`);
-                document.documentElement.style
-                    .setProperty(
-                        cssVar,
-                        `var(--${theme}-${cssVar.replace('--', '')})`
-                    );
+                document.documentElement.style.setProperty(
+                    cssVar,
+                    `var(--${theme}-${cssVar.replace('--', '')})`
+                );
             });
         }
     },
