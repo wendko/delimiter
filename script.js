@@ -55,6 +55,7 @@ const vm = new Vue({
                 '--c-secondary',
                 '--c-text-btn',
                 '--c-text-label',
+                '--c-text-title',
                 '--c-heart'
             ].forEach(cssVar => {
                 document.documentElement.style.setProperty(

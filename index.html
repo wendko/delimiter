@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-    <link href="https://fonts.googleapis.com/css?family=Pacifico|Fira+Sans&display=swap" rel="stylesheet">
-    <title>Join</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <link href="https://fonts.googleapis.com/css?family=Nova+Mono|VT323|Pacifico|Fira+Mono&display=swap" rel="stylesheet">
+    <title>Delimiter</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
@@ -18,10 +18,13 @@
             </label>
         </div>
         <div class="title">
-            <span>Split</span>
+            &nbsp;Delimiter&nbsp;
+        </div>
+        <div class="subtitle">
+            <span>split</span>
             <span>&</span>
-            <span>Join</span>
-            <span>Strings</span>
+            <span>join</span>
+            <span>strings</span>
         </div>
         <div class="content">
             <div class="input-controls">
@@ -50,7 +53,7 @@
                             <span class="duplicate-placeholder">None</span>
                         </div>
                         <div v-for="dupe in getDuplicateCount">
-                            {{dupe.name | handleWhiteSpace}} ({{dupe.count}} occurences)
+                            {{dupe.name | handleWhiteSpace}} ({{dupe.count}} extras)
                         </div>
                     </div>
                 </div>
