@@ -18,6 +18,7 @@ const vm = new Vue({
         transformedText: '',
         oldDelimiter: '',
         newDelimiter: ',',
+        coloredTheme: false,
     },
     methods: {
         removeDuplicates: function () {
@@ -43,6 +44,26 @@ const vm = new Vue({
             this.transformedText = this.originalText
                 .split(this.oldDelimiter)
                 .join(newDelimiter);
+        },
+        coloredTheme: function (isColoredTheme) {
+            const theme = isColoredTheme ? 'unicorn' : 'horse';
+            [
+                '--c-icon-bg',
+                '--c-border',
+                '--c-focus',
+                '--c-primary',
+                '--c-secondary',
+                '--c-text-btn',
+                '--c-text-label',
+                '--c-heart'
+            ].forEach(cssVar => {
+                console.log(`var(--${theme}-${cssVar.replace('--', '')})`);
+                document.documentElement.style
+                    .setProperty(
+                        cssVar,
+                        `var(--${theme}-${cssVar.replace('--', '')})`
+                    );
+            });
         }
     },
     computed: {

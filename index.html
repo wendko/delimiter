@@ -4,13 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Pacifico|Fira+Sans&display=swap" rel="stylesheet">
     <title>Join</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
     <div id="app">
+        <div class="theme-toggle">
+            <input type="checkbox" id="themeCheckbox" class="theme-checkbox" v-model="coloredTheme"></input>
+            <label for="themeCheckbox" class="theme-icon">
+                {{coloredTheme ? '🦄' : '🐴'}}
+            </label>
+        </div>
         <div class="title">
             <span>Split</span>
             <span>&</span>
@@ -41,7 +47,7 @@
                     <label>Duplicates</label>
                     <div class="duplicate-count">
                         <div v-if="!separateDuplicates.duplicates.length">
-                            None
+                            <span class="duplicate-placeholder">None</span>
                         </div>
                         <div v-for="dupe in getDuplicateCount">
                             {{dupe.name | handleWhiteSpace}} ({{dupe.count}} occurences)
