@@ -28,21 +28,21 @@
         </div>
         <div class="content">
             <div class="input-controls">
-                <label>Original text</label>
-                <textarea class="original-text" v-model="originalText"
+                <label for="originalText">Original text</label>
+                <textarea id="originalText" class="original-text" v-model="originalText"
                     placeholder="Put your text here">
                 </textarea>
             </div>
             <div class="controls">
                 <div>
-                    <label>Old Delimiter</label>
-                    <textarea class="old-delimiter-text" v-model="oldDelimiter" 
+                    <label for="oldDelimiter">Old Delimiter</label>
+                    <textarea id="oldDelimiter" class="old-delimiter-text" v-model="oldDelimiter" 
                         v-bind:placeholder="oldDelimiter.length < 1 ? 'None' : ''">
                     </textarea>
                 </div>
                 <div>
-                    <label>New Delimiter</label>
-                    <textarea class="new-delimiter-text" v-model="newDelimiter"
+                    <label for="newDelimiter">New Delimiter</label>
+                    <textarea id="newDelimiter" class="new-delimiter-text" v-model="newDelimiter"
                         v-bind:placeholder="newDelimiter.length < 1 ? 'None' : ''">
                     </textarea>
                 </div>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="output-controls">
-                <label>Transformed text</label>
+                <label for="transformedText">Transformed text</label>
                 <textarea id="transformedText" class="transformed-text" v-model="transformedText"
                     placeholder="Your transformed text will appear here"></textarea>
                 <div class="transformed-text-actions">
