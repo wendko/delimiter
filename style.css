@@ -15,9 +15,10 @@
     --horse-c-text-btn: white;  
     --horse-c-text-label: #005304;  
     --horse-c-heart: red;
+    --horse-c-bg: #f2ffea;
 
     --unicorn-c-icon-bg: #ff91f0;
-    --unicorn-c-border: #ff91f0;  
+    --unicorn-c-border: #b200c2;  
     --unicorn-c-focus: #ffe550;
     --unicorn-c-primary: #df0082;
     --unicorn-c-secondary: #b200c2;
@@ -25,6 +26,7 @@
     --unicorn-c-text-btn: white;  
     --unicorn-c-text-label: #df0082;  
     --unicorn-c-heart: #b200c2;
+    --unicorn-c-bg: #fad0bf;
     
     --c-icon-bg: var(--horse-c-icon-bg);
     --c-border: var(--horse-c-border);
@@ -35,6 +37,7 @@
     --c-text-btn: var(--horse-c-text-btn);
     --c-text-label: var(--horse-c-text-label);
     --c-heart: var(--horse-c-heart);
+    --c-bg: var(--horse-c-bg);
 }
 
 /* Container styles */
@@ -48,6 +51,10 @@
 .duplicate-detail
 {
     display: grid;
+}
+
+body, textarea {
+    background-color: var(--c-bg);
 }
 
 .app {
